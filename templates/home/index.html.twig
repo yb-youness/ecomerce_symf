@@ -1,0 +1,237 @@
+{% extends 'base.html.twig' %}
+{% block title%}Home{% endblock %}
+
+{% block body %}
+
+
+  <!-- Home-slider  -->
+    <section class="pt-5 pb-5 mt-0 align-items-center d-flex bg-dark bgsec1"  >
+
+      <div id="carouselExampleIndicators" class="carousel slide carousel-fade container" data-ride="carousel">
+      
+        <div class="carousel-inner row">
+          
+              
+          <div class="carousel-item active col-lg-6 gauche">
+              
+            <div class="col-lg-12 gauche carousel_caption">
+              <h2 class="headsize"><span class="headgr">THE BEST</span><br><span class="colorprima">WOOCEMERCE</span></h2>
+              <p class="headgr">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+               eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+               <div class="">
+               <a class="btn a2" href="{{path('products')}}">BUY NOW!</a>
+             </div>
+              </div>
+      
+               </div>
+               <div class="carousel-item col-lg-6 gauche">
+              
+                <div class="col-lg-12 gauche carousel_caption">
+                  <h2 class="headsize"><span class="headgr">THE BEST</span><br><span class="colorprima">WOOCEMERCE</span></h2>
+                  <p class="headgr">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                   eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                   <div class="">
+                   <a class="btn  a2" href="products">BUY NOW!</a>
+                 </div>
+                  </div>
+          
+                   </div>
+        </div>
+      </div>
+       
+     </div> 
+    </section>
+    <!-- end Home-slider -->
+
+    <!-- Home-Best seller --> 
+    <section class="container-fluid no-gutters">
+      
+
+
+        <div class="row  justify-content-center p-5">
+          
+          <div class="col-md-3 col-sm-6 align-self-center p-5 m-3">
+            <h2 class="font-weight-bold ">FEATURED PRODUCTS</h2>
+            <p><small class="font-italic colorprima">best production from us</small></p>
+          
+            
+            <p>Lorem ipsum, dolor sit amet consectetur 
+              adipisicing elit. Nobis, facilis ipsam </p>
+             
+          </div>
+            {% for article in bestar|slice(0, 4) %}
+            <div class="col-md-2 col-sm-6">
+                <div class="product-grid7">
+                    <div class="product-image7">
+                        <a href="{{path('detail',{'id': article.getId()})}}">
+                            <img class="pic-1" src="{{article.getPhotoPath()}}">
+                        </a>
+                        <ul class="social">
+                            {# <li><a href="{{path('AddPanier',{'id': article.id})}}" class="fa fa-shopping-cart"></a></li> #}
+                           <span class="badge badge-success">New</span>
+                            <li><a href="" class="fas fa-heart"></a></li>
+                            <li><a href="" class="fas fa-retweet"></a></li>
+                        </ul>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="title"><a href="{{path('detail',{'id': article.getId()})}}">{{article.getNomArticle()}}</a></h3>
+                        <div class="price">{{article.getPrixArticle()}} Dh
+                      </div>
+                        <ul class="rating">
+                            <li class="fa fa-star"></li>
+                            <li class="fa fa-star"></li>
+                            <li class="fa fa-star"></li>
+                            <li class="fa fa-star"></li>
+                            <li class="fa fa-star"></li>
+                        </ul>
+                        
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            
+
+        
+            
+                </div>
+        
+    
+    
+
+
+
+    </section>
+    <!-- end best seller -->
+    <!-- section card with icon -->
+    <section class="container-fluid">
+      <div class="row text-center p-5">
+         <div class="col-md-3">
+           <img src="coustumcss/images/diamond.png">
+           
+           <p class="font-weight-bold"><br>SPECIAL OFFERS<br>
+            <small class="font-weight-light font-size-11">Shop big save big</small></p>
+        </div>
+
+        <div class="col-md-3">
+          <img src="coustumcss/images/plane.png">
+          
+          <p class="font-weight-bold"><br>FREE DELIVERY<br>
+           <small class="font-weight-light font-size-11">On orders Above 599</small></p>
+       </div>
+
+       <div class="col-md-3">
+        <img src="coustumcss/images/share.png">
+        
+        <p class="font-weight-bold"><br>30 DAYS RETURN<br>
+         <small class="font-weight-light font-size-11">Policy we offers</small></p>
+     </div>
+
+     <div class="col-md-3">
+      <img src="coustumcss/images/rocket.png">
+      
+      <p class="font-weight-bold"><br>FASTEST SHIPPING<br>
+       <small class="font-weight-light font-size-11">2 Days Express</small></p>
+   </div>
+
+      </div>
+    </section>
+<!-- end card with icons -->
+<!-- 3images  -->
+    <section class="">
+            <div class="row no-gutters">
+              <div class="col-md-4 parent">
+                <img src="coustumcss/images/bg.png" class="w-100 " alt="">
+               
+              </div>
+              <div class="col-md-4 parent">
+                <img src="coustumcss/images/bg-1.png" class="w-100" alt="">
+                
+              </div>
+              <div class="col-md-4 parent">
+                <img src="coustumcss/images/bg-2.png" class="w-100" alt="">
+                
+              </div>
+            </div>
+    </section>
+<!-- end 3images -->
+<!-- featured products -->
+    <section class="p-5">
+
+      <h3 class="text-center font-weight-bold">PRODUCTS<br>
+        <small class="font-weight-lighter font-italic colorprima font-size-15">Newest trends top brands</small></h3>
+      {% if articles %}
+            <!-- first row -->
+        <div class="row  justify-content-center ">
+         
+          {% for article in articles %}
+          
+            <div class="col-md-2 col-sm-6">
+                <div class="product-grid7">
+                    <div class="product-image7">
+                       <a href="{{path('detail',{'id': article.getId()})}}">
+                            <img class="pic-1" src="{{article.getPhotoPath()}}">
+                        </a>
+                        <ul class="social">
+                           {#  <li><a href="{{path('AddPanier',{'id': article.id})}}" class="fa fa-shopping-cart"></a></li> #}
+                            <li><a href="{{path('AddPanier',{'id': article.id})}}" class="fa fa-shopping-cart"></a></li>
+                            <li><a href="" class="fas fa-heart"></a></li>
+                            <li><a href="" class="fas fa-retweet"></a></li>
+                        </ul>
+                    </div>
+                    <div class="product-content">
+                              <h3 class="title"><a href="{{path('detail',{'id': article.getId()})}}">{{article.getNomArticle()}}</a></h3>
+                        <div class="price">{{article.getPrixArticle()}} Dh
+                      </div>
+                        <ul class="rating">
+                            <li class="fa fa-star"></li>
+                            <li class="fa fa-star"></li>
+                            <li class="fa fa-star"></li>
+                            <li class="fa fa-star"></li>
+                            <li class="fa fa-star"></li>
+                        </ul>
+                        
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+               {% else %} 
+    <p>Aucun articles trouveé </p>
+  {% endif %} 
+    {% if(paginations) %}  
+            <div class="d-flex justify-content-center">{{knp_pagination_render(articles)}}</div> 
+   {% endif %}
+
+    </section>
+    <section>
+     <div class="row no-gutters text-center">
+       <div class="col-md-6 ">
+         <img src="coustumcss/images/bg3.png" class="w-100" alt="">
+         <div class="centered my-auto">
+         <p class="font-weight-bold font-size-21">Get Out Special Discount<br>
+           <small class="font-size-12">Donec eu tristique felis. Duis augue mi, auctor ut purus et, dignissim aliquet quam. 
+          register your email for news and specialeu tristique felis. Duis augue mi</small></p>
+          <div class="input-group">
+            <input type="text"  class="form-control" placeholder="Email address..." aria-label="Email address..." aria-describedby="button-addon2">
+            <div class="input-group-append">
+              <button class="btn btn-outline-success ml-2" type="button" id="button-addon2">GET COUPON NOW</button>
+            </div>
+          </div>
+          </div>
+       </div> 
+       <div class="col-md-6 my-auto">
+         <img src="coustumcss/images/brand-logo-4a.png" class="mr-4 imgsize" alt="">
+         <img src="coustumcss/images/brand-logo-1a.png" class="mr-4 imgsize" alt="">
+         <img src="coustumcss/images/brand-logo-2a.png" class="mr-4 imgsize" alt="">
+         <img src="coustumcss/images/brand-logo-3a.png" class="imgsize" alt="">
+      </div>
+     </div>
+
+
+    </section>
+
+
+{% endblock %}
+
+ 
+

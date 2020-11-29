@@ -1,0 +1,214 @@
+easy_admin:
+
+
+       
+  design:
+    assets:
+      css:
+         - 'css/styles.css'
+    # brand_color: 'red'
+    # color_scheme: 'dark'
+    menu:
+    
+      - {label: "Menu"}
+      - label: "Inventaire stock"
+        icon: "newspaper-o"
+        children:
+          - {entity: "Article", label: "List Article", icon: "th-list",actions: 'show'}
+          - {entity: "Article", label: "Ajouter Article", icon: "plus-square", params: {action: 'new'}}
+      - label: "Paiement"
+        icon : "shopping-cart"
+        children:
+          - {entity: "Paiement" , label: "List Paiement", icon: "list-alt",actions: 'show'}
+      - label: "Offre"
+        icon : "gift"
+        children:
+          - {entity: "Offre" , label: "List Des Offres", icon: "list-alt",actions: 'show'}
+          - {entity: "Offre", label: "Ajouter Des Offre", icon: "plus-square", params: {action: 'new'}}     
+      - label: "Categorie"
+        icon : "inbox"
+        children:
+          - {entity: "Categorie" , label: "List Categorie", icon: "list-alt",actions: 'show'}
+          - {entity: "Categorie", label: "Ajouter Categorie", icon: "plus-square", params: {action: 'new'}}
+          - {entity: "SousCategorie" , label: "List Sous Categorie", icon: "list-alt",actions: 'show'}
+          - {entity: "SousCategorie", label: "Ajouter Sous Categorie", icon: "plus-square", params: {action: 'new'}}
+      # - label: "Sous Category"
+      #   icon : "caret-down"
+      #   children:
+      #        - {entity: "SousCategorie" , label: "List Cat", icon: "list-alt",actions: 'show'}
+      #        - {entity: "SousCategorie", label: "Ajouter Cat", icon: "plus-square", params: {action: 'new'}}
+      - label: "Users Setings"
+        icon : "users-cog"
+        children:
+          - {entity: "User", label: "List User", icon: "list-alt",actions: 'show',  permission: ROLE_SUPERADMIN}
+          - {entity: "User", label: "Ajouter user", icon: "plus-square", params: {action: 'new'}, permission: ROLE_SUPERADMIN}
+      
+      - { label: "Envoi D'Email", url: '/contact/mail', icon : "envelope-square"}           
+      - { label: 'Homepage', url: '/', icon : "shopify"}
+     
+      
+        
+        
+
+  site_name: '<a href="/back/"><img src="../../css/img/logo.png"/></a>'           
+  
+  entities:
+ 
+    
+
+
+
+              
+             
+
+
+
+
+
+
+
+       
+      Article:  
+         class: App\Entity\Article
+         label: "Articles"
+         form:
+             fields:
+                 - { property: 'nom_article', label: 'Nom Article' }
+                 - { property: 'description_article', label: 'Description Article' }
+                 - { property: 'couleur', label: 'couleur' }
+                 - { property: 'prix_article', label: 'Prix' }
+                #  - { property: 'quantite_article', label: 'Quantite Article' }
+                 - { property: 'categorie', label: 'Categorie Article' }
+                 - { property: 'thumbnail', label: 'Image Article' ,type: 'vich_image'}
+         list:
+            filters: ['couleur','prix_article','quantite_article','categorie'] 
+                     
+            # fields:
+            fields:
+            - nom_article
+            - description_article
+            - couleur
+            - prix_article
+            # - quantite_article
+            - categorie 
+            - {property: 'PhotoPath' ,label: 'Image ', type: 'image'}   
+          
+          
+            #  collapse_actions: true
+            #  actions: ['show', 'edit', 'delete']
+            #  batch_actions: ['delete']
+            #  title: "Some posts from the other world"
+            #  fields: ['nom_article', 'description_article', 'couleur','prix_article','quantite_article',{property: 'thumbnail', type: 'image', base_path: '%uploads_path%'},'categorie'  ]
+            #  filters: ['published']
+
+         show:
+          fields:
+            - nom_article
+            - description_article
+            - couleur
+            - prix_article
+            - quantite_article
+            - categorie
+      
+        
+      User:  
+         class: App\Entity\User 
+         controller: App\Controller\UserController
+         label: "Users"
+         form:
+             fields:
+                 - { property: 'email', css_class: 'input-large' }
+                 - { property: 'nom'}
+                 - { property: 'prenom'} 
+                 - { property: 'tel'} 
+                 - { property: 'adress'} 
+                 - 'statu'
+                 
+         new:
+            fields:
+                 - { property: 'email', css_class: 'input-large' }
+                 - { property: 'nom'}
+                 - { property: 'prenom'} 
+                 - { property: 'tel',  type: 'text'} 
+                 - { property: 'adress',  type: 'textarea'} 
+                 - 'statu'
+                 - { property: 'password', type: 'password' }
+                 - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'ADMIN': 'ROLE_ADMIN' ,'SUPERADMIN': 'ROLE_SUPERADMIN'  } } }
+                         
+    
+      Paiement:  
+         disabled_actions: ['new','delete', 'edit' ]
+        #  disabled_actions: ['delete', 'edit' ]
+         class: App\Entity\Paiement
+         list:
+            fields:
+            - id
+            - nom
+            - prenom
+            - email
+            - tel
+            - adress
+            - panier
+            - date_paiemnet 
+            filters: ['date_paiemnet','email','tel']
+         
+      SousCategorie:  
+        class: App\Entity\SousCategorie 
+        label: "Sous Categorier"
+        form:
+             fields:
+                 - { property: 'nom_sous_categ', label: 'Nom Sous Categorier' }
+                 - { property: 'description', label: 'Description Sous Categorier' }
+                 - { property: 'categorie', label: ' Categorier Parent' }
+                 - { property: 'thumbnail', label: 'Image Sous Categorie' ,type: 'vich_image'}
+        list:
+            # fields:
+            fields:
+            - nom_sous_categ
+            - description
+            - categorie
+            - {property: 'PhotoPath' ,label: 'Image ', type: 'image'}   
+          
+        show:
+          fields:
+            - nom_sous_categ
+            - description
+            - categorie
+            - {property: 'PhotoPath' ,label: 'Image ', type: 'image'}   
+      Categorie:
+        class: App\Entity\Categorie
+        form:
+             fields:
+                 - { property: 'Nom_cat', label: 'Nom Categorier' }
+                 - { property: 'Description_cat', label: 'Description Categorier' }
+                 - { property: 'thumbnail', label: 'Image Sous Categorie' ,type: 'vich_image'}
+        list:
+            # fields:
+            fields:
+            - Nom_cat
+            - Description_cat
+            - {property: 'PhotoPath' ,label: 'Image ', type: 'image'}   
+          
+        show:
+          fields:
+            - Nom_cat
+            - Description_cat
+      
+      
+      Offre:  
+         class: App\Entity\Offre          
+         list:
+            filters: ['date_debut','date_fin'] 
+            fields:
+            - id
+            - date_debut
+            - date_fin
+            - {property: 'prixavred' ,label: 'Prix Avant Reduction Dh'}
+            - {property: 'reduction',label: 'Reduction en %'}
+            - {property: 'prixapresreduction' ,label: 'Prix Apres Reduction Dh'}
+            - {property: 'idarticle' ,label: 'Article'}
+            - {property: 'photarticle' ,label: 'Image ', type: 'image'}
+        
+  # list:       
+  #   item_permission : 'ROLE_SUPERADMIN'  
+          

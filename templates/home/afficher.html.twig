@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+ {% block stylesheets %}
+        <link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.min.css')}}">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+	<link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
+      integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../coustumcss/css/styles.css" />
+    
+        {% endblock %}
+{% block title %}Product{% endblock %}
+ 
+{% block body %}
+      <div class="container p-4">
+      <div class="row ">
+                <div class="product-grid7 col">
+                    <div class=" product-image7 w-50">
+                        <a href="#">
+                            <img class="pic-1" src="{{article.getPhotoPath()}}">
+                        </a>
+                        <ul class="social">
+                             <li><a href="{{path('AddPanier',{'id': article.id})}}" class="fa fa-shopping-cart"></a></li> 
+                            <li><a href="" class="fas fa-heart"></a></li>
+                            
+                        </ul>
+                    </div> 
+                    </div>
+
+                    <div class="product-grid7 col">
+                        <h3 class="title"><a href="#">{{article.getNomArticle()}}</a></h3>
+                        <div class="">{{article.getPrixArticle()}} Dh
+                        <p>Dans la categorie : {{article.categorie.getNomCat() }}</p> 
+                        <p class="color-desc"> Color: {{article.getCouleur()}}</p>
+                        <p style="color:black;">{{article.getDescriptionArticle() }}</p>
+                        <ul class="rating">
+                            <li class="fa fa-star"></li>
+                            <li class="fa fa-star"></li>
+                            <li class="fa fa-star"></li>
+                            <li class="fa fa-star"></li>
+                            <li class="fa fa-star"></li>
+                        </ul>
+                        </div>
+                        
+                        <form action="" method="POST">
+                          <input type="number" id="tentacles"  name="qunt" min="1" max="100" value="1">
+                        {# <a id='link' href="{{path('detail',{'id': article.id})}}" class="btn btn1">Panier</a> #}
+                         <input type="submit" class="btn btn-success" value="add" name="add">
+                          {# <a id='link' href="{{path('AddPanier',{'id': article.id})}}" class="btn btn1">Panier</a> #}
+                         </form>
+                        
+                        </div>         
+      </div>
+
+    </div>
+{% endblock  %}
+

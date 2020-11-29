@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier{% endblock %}
+
+{% block body %}
+<div class="container">
+    
+
+<h1>Mon Panier</h1>
+{%if panierArticle | length >0  %}
+    <table class="table table-bordered">
+    <thead><tr>
+                <th scope="col">Article</th>
+                <th scope="col">Prix</th>
+                <th scope="col">Quantité</th>
+                <th></th>
+            </tr>
+    <tbody>
+     <form method="post" >
+    {% for panier in panierArticle %}      
+    <tr>
+        <td> <img class="w-25" src="{{panier.article.getPhotoPath()}}"> {{panier.article.getNomArticle()}}</td> 
+        <td>{{panier.article.getPrixArticle()}} Dh </td>
+        <td>{{panier.quantite}}</td> 
+           
+ 
+        <td>
+          <div class="text-center">
+	<!-- Button HTML (to Trigger Modal) -->
+	<a href="#myModal" style="color:black;" data-toggle="modal"><i class="far fa-times-circle"></i></a>
+</div>
+        </td> 
+    </tr>   
+
+    <!-- Modal HTML -->
+<div id="myModal" class="modal fade">
+	<div class="modal-dialog modal-confirm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<div class="icon-box">
+					<i class="material-icons">&#xE5CD;</i>
+				</div>				
+				<h4 class="modal-title">Vous Voulez suprimer? </h4>	
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			</div>
+			<div class="modal-body">
+				<p>Vous Voulez suprimer? .</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info" data-dismiss="modal">Annuler</button>
+				<a  href="{{path('RemovePanier',{'id':panier.article.id})}}" type="btn btn-danger" class="btn btn-danger">Delete</a>
+			</div>
+		</div>
+	</div>
+</div>    
+    {% endfor %} 
+            </form> 
+    <tfoot>
+      {% if  is_granted('IS_AUTHENTICATED_FULLY') %} 
+      <td></td>
+      <td></td>
+      <td></td>
+    <td><a href="{{path('paiement',{'donnes':donnes})}}" class="btn btn-success btn-sm ">Payer</a></td>
+        {% else %} 
+         <td><a href="{{path('app_login')}}" class="btn btn-success btn-sm">Connexion</a></td>
+        {% endif %}         
+    </tr>
+    </tfoot></table>
+    {% else %} <h1>Votre Panier est Vide </h1>
+    {% endif %}
+</div>  
+{% endblock %}

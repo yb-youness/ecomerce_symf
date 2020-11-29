@@ -1,0 +1,22 @@
+{% extends 'base.html.twig'%}
+{% block title %}Sing in{% endblock %}
+{% block body %}
+<div class="container p-3">
+
+<h1 class="text-center">Inscription !</h1>
+<div class="row justify-content-center">
+<div class="col-6 ">
+  {% for message in app.flashes('success') %} 
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+{% endfor %}
+
+{{form_start(form)}}
+
+{{form_end(form)}}
+ <a class="" type="submit" href="{{path('app_login')}}">Back <back </a>
+ </div>
+ </div>
+  </div>
+{% endblock %}

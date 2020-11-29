@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+{% block title%}Home{% endblock %}
+{% block body %}
+
+<div class="colorlib-shop">
+			<div class="container-fluid p-4">
+			<div class="row justify-content-center">
+					<div class="col-md-6 col-md-offset-3 text-center colorlib-heading">
+						<h2><span>Les Offres</span></h2>
+					</div>
+				</div>
+ {% if articles %}
+ 	              
+						<div class="row justify-content-center">
+						
+						{% for article in articles %}
+						
+			<div class="col-md-2 col-sm-6">
+                <div class="product-grid7">
+                    <div class="product-image7">
+                    <span class="badge badge-secondary"></span>
+                    
+                        <a href="{{path('detail',{'id': article.getId()})}}">
+                            <img class="pic-1" src="{{article.getPhotoPath()}}">
+                        </a>
+                        
+                        <ul class="social">
+                            {# <li><a href="{{path('AddPanier',{'id': article.id})}}" class="fa fa-shopping-cart"></a></li> #}
+                            <span class="badge badge-success">SOLDE</span>
+                        </ul>
+                    
+                    </div>
+                    <div class="product-content">
+                        <h3 class="title"><a href="{{path('detail',{'id': article.getId()})}}">{{article.getNomArticle()}}</a></h3>
+                        <span class="span1">{{article.getPrixArticle()}} Dh </span>
+                        <div class="price">{{monta[ loop.index -1 ]}} Dh  </div>
+                        <ul class="rating">
+                            <li class="fa fa-star"></li>
+                            <li class="fa fa-star"></li>
+                            <li class="fa fa-star"></li>
+                            <li class="fa fa-star"></li>
+                            <li class="fa fa-star"></li>
+                        </ul>
+                        
+                    </div>
+
+					</div>  
+                </div>
+				 {% endfor %}
+        </div>  
+   {% else %} 
+    <p>Aucun Offre trouveé </p>
+  {% endif %} 
+  {% endblock %}

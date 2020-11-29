@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+        <title>{% block title %}Welcome! {% endblock %}</title>
+{% block stylesheets %}
+        <link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.min.css')}}">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+	<link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
+      integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="coustumcss/css/styles.css" />
+	
+        {% endblock %}
+    </head>
+<header class="fixed">
+
+     <nav class="navbar navbar-dark  dark-bar">
+      <div class="container-fluid">
+      <div class="white">
+        <span class="icon imarg"> <i class="fas fa-phone "></i></span><span class="size1head" style="margin-right: 40px;">+1 123 456 789</span>
+
+        <span class="icon imarg"> <i class="fas fa-envelope "></i></span><span class="size1head ">info@company.com</span>
+					
+				</div>
+      <div class="btn-group pull-right white">
+        <a href="#" class="white"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="white"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="white"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="white"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" class="white"><i class="fab fa-behance"></i></a>
+        </div>
+        
+      </div>
+    </nav>
+    <!-- navbar 2 -->
+    <!-- nav-bar-area-start -->
+  	<nav class="navbar navbar-expand-lg navbar-light   bg-light sizenav">
+      <div class="container-fluid">
+    
+        <!-- ====================nav-left-site==================== -->
+        <a class="navbar-brand" href="{{path('home')}}"><img src="/coustumcss/images/Renoshopbee.png"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+        <!-- ====================nav-middle-site==================== -->
+      <div class="collapse navbar-collapse bg-light" id="navbarSupportedContent">
+        <ul class="navbar-nav m-auto fontheaderp bg">
+          <li class="nav-item">
+            <a class="nav-link fontheaderp" href="{{path('home')}}">HOME</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fontheaderp" href="{{path('contact')}}">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fontheaderp" href="{{path('about')}}">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fontheaderp" href="{{path('products')}}">products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fontheaderp" href="{{path('offre')}}">Offre</a>
+          </li>
+            
+		  
+        </ul>
+       
+        <!-- ====================nav-right-site==================== -->
+        <ul class="navbar-nav  my-2 my-lg-0" >
+          {% if app.session %}
+           <div class="icon-badge-container">
+         <a href="{{path('panier')}}" title="panier" class=""><i class="fas fa-shopping-cart black icon-badge-icon"></i></a>
+        {% if app.session.get('count') > 0 %}
+         <span class="icon-badge">{{app.session.get('count')}}</span>
+          {% endif %}
+          </div>
+           {% else %}
+          <a href="{{path('panier')}}" title="panier" class=""><i class="fas fa-shopping-cart black"></i></a>
+          {% endif %}
+           
+          <form action="{{path('products')}}" class="searchbar" method="post">
+          <input class="search_input" type="text" name="categorie" placeholder="Search by categories...">
+         
+           <label for="mySubmit" class=""><i class="fas fa-search black"></i></label>
+          <input type="submit" id="mySubmit" class="search_icon hidden btn" name="btn">
+          </form>
+  <div>
+
+{% if is_granted('ROLE_SUPERADMIN') or is_granted('ROLE_ADMIN') %}
+          
+     <a class="" title="dashboard" href="{{path('easyadmin')}}"><i class="fas fa-user black"></i></a>
+          
+		  {% endif %}
+
+		  {% if not is_granted('IS_AUTHENTICATED_FULLY') %} 
+         
+   <a class="" title="connecter" href="{{path('app_login')}}"><i class="fas fa-sign-in-alt black"></i></a>
+          
+		  {% else %} 
+		  
+  <a class="" title="deconnecter" href="{{path('app_logout')}}"><i class="fas fa-sign-out-alt black"></i></a>
+          
+		  {% endif %}
+       </div>   
+          {# <a href="#" class=""><i class="fas fa-bars black"></i></a> #}
+        </ul>
+
+        
+      </div>
+      </div>
+      
+    </nav>
+		
+</header>
+ 
+          {% block body %}
+          
+          {% endblock %}
+        </div>  
+     
+		 <footer>
+  <section >
+    
+      
+     <div class="card">   
+    <div class="card-header ">
+      <nav class="navbar container">
+        
+        <div class="navfooter ">
+
+          <span class="cardfoot">We’re confident we’ve provided all the best for you. Stay connect with us</span>
+            
+          </div>
+          <div class="btn-group float-right navfooter">
+            <a href="#" class="cardfoot"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="cardfoot"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="cardfoot"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="cardfoot"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="cardfoot"><i class="fab fa-behance"></i></a>
+            </div>
+          </nav>
+    </div>
+    <div class="card-body  text-center container align-items-center py-5">
+      
+      <div class="row text-left">
+        <div class="col-md-3">
+          <h4>INFORMATION</h4>
+          <ul class="list-unstyled mt-3">
+              <li><a href="#" class="cardfoot">Delivery Information</a></li>
+              <div class="mb-2"></div>
+              <li><a href="#" class="cardfoot">Discount</a></li>
+              <div class="mb-2"></div>
+              <li><a href="#" class="cardfoot">Sitemap</a></li>
+              <div class="mb-2"></div>
+              <li><a href="#" class="cardfoot">Privacy Policy</a></li>
+              <div class="mb-2"></div>
+              <li><a href="#" class="cardfoot">My account</a></li>
+          </ul>
+      </div>
+      <div class="col-md-3">
+        <h4>MY ACCOUNT</h4>
+        <ul class="list-unstyled mt-3">
+            <li><a href="#" class="cardfoot">About Us</a></li>
+            <div class="mb-2"></div>
+            <li><a href="#" class="cardfoot">Contact Us</a></li>
+            <div class="mb-2"></div>
+            <li><a href="#" class="cardfoot">Our Team</a></li>
+            <div class="mb-2"></div>
+            <li><a href="#" class="cardfoot">Testimonials</a></li>
+            <div class="mb-2"></div>
+              <li><a href="#" class="cardfoot">My account</a></li>
+        </ul>
+    </div><div class="col-md-3">
+      <h4>HELP</h4>
+      <ul class="list-unstyled mt-3">
+          <li><a href="#" class="cardfoot">About Us</a></li>
+          <div class="mb-2"></div>
+          <li><a href="#" class="cardfoot">Contact Us</a></li>
+          <div class="mb-2"></div>
+          <li><a href="#" class="cardfoot">Our Team</a></li>
+          <div class="mb-2"></div>
+          <li><a href="#" class="cardfoot">Testimonials</a></li>
+        
+      </ul>
+  </div><div class="col-md-3">
+    <h4>CONTACT INFO</h4>
+    <ul class="list-unstyled mt-3">
+        <li><a href="#" class="cardfoot"><i class="fas fa-globe-americas"></i>1234 Your Adress,Country.</a></li>
+        <div class="mb-2"></div>
+        <li><a href="#" class="cardfoot"><i class="fas fa-phone-alt"></i>+1 234 5678 9999</a></li>
+        <div class="mb-2"></div>
+        <li><a href="#" class="cardfoot text-success"><i class="fas fa-envelope cardfoot"></i>mail@domain.com</a></li>
+     
+    </ul>
+</div>
+      </div>
+      
+      
+    </div>
+  </div>
+
+    <nav class="navbar navbar-fixed-bottom navbar-dark dark-bar ">
+     
+      <div class="container">
+      <div class="navfooter">
+
+        <span class="size1head ">Copyright 2017 RenoshopBee all right reserved - Design by BeeStudios</span>
+					
+				</div>
+      <div class="btn-group pull-right ">
+        <img class="m-1" src="/coustumcss/images/visa5.png">
+        <img class="m-1" src="/coustumcss/images/amazon3.png">
+        <img class="m-1" src="/coustumcss/images/card34.png">
+        <img class="m-1" src="/coustumcss/images/maestro1.png">
+        <img class="m-1" src="/coustumcss/images/paypal11.png">
+      
+        </div>
+        
+    </div>
+    </nav>
+  </section>
+</footer>
+      {% block javascripts %}
+ <script src="https://kit.fontawesome.com/yourcode.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+      
+    {% endblock %}  
+</html>

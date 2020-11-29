@@ -1,0 +1,119 @@
+{% extends 'base.html.twig' %}
+{% block title %}Paiemnet{% endblock %}
+{% block stylesheets %}
+        <link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.min.css')}}">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+	<link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
+      integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../coustumcss/css/styles.css" />
+	
+        {% endblock %}
+{% block body %}
+
+
+
+        <div class="container">   
+        {% for message in app.flashes('success') %} {#Resp pour Afficher les message    #}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+    <div class="row">
+    <div class="col p-3">
+      <nav aria-label="Page navigation">
+        <ul class="pagination pagi">
+          
+          <li class="page-item"><a class="m-2 pagi" href="#">Home</a>
+          <a class="m-2 pagi" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a></li>
+          <li class="page-item"><a class="m-2 pagi" href="#">Page</a>
+          <a class="m-2 pagi" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a></li>
+          <li class="page-item"><a class="m-2 pagi" href="#">Shop</a>
+          <a class="m-2 pagi" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a></li>
+          <li class="page-item"><a class="m-2 pagi" href="#">Comparison</a></li>
+          
+          
+        </ul>
+      </nav>
+    </div>
+
+  </div>
+<div class="row justify-content-center p-3" >
+   <div class="col">
+        <form action="" method="post">
+            <div class="form-row">
+              <div class="col">
+                <label>Prenom<span class="obligatoire">*</span></label>
+                <input type="text" name="prenom" class="form-control" required>
+              </div>
+              <div class="col">
+                  <label>Nom<span class="obligatoire">*</span></label>
+                <input type="text" name="nom" class="form-control" required>
+              </div>
+              
+            </div>
+               <div>
+                <label>Email<span class="obligatoire">*</span></label><br>
+                <input type="email" name="email" class="form-control"  value='{{app.user.email}}' disabled=true >
+                </div>
+                <div>
+                <label>Adresse<span class="obligatoire">*</span></label><br>
+                <input type="text" name="adresse" class="form-control" required>
+                </div>
+                <div>
+                <label>Telephone<span class="obligatoire">*</span></label>
+                <input type="text" name="Tel" class="form-control" required>
+                </div>
+                <div>
+                <label>Num Carte<span class="obligatoire">*</span></label>
+                <input type="text" name="ncard" class="form-control" required>
+                </div>
+                <div>
+                <label>CCV<span class="obligatoire">*</span></label><br>
+                <input type="text" name="ccv" class="form-control" required>
+                </div>
+
+          
+    </div>
+    <div class="col">
+      <div class="your-order__wrap border border-secondary p-3">
+        <h5>Your Order</h5>
+        <table class="table">
+          <tbody >
+            <tr>
+              <th>Product</th>
+              <td>Prix</td>
+            </tr>
+            {% for panier in panierArticle %} 
+            <tr>
+              <th>{{panier.article.getNomArticle()}} x {{panier.quantite}}</th>
+              <td>{{panier.article.getPrixArticle()}} Dh</td>
+              <td>Total {{prixt[ loop.index -1 ]}} Dh</td>
+            </tr>
+            {% endfor %}
+            <tr>
+              <th>Shipping</th>
+              <td>Free Shipping</td>
+            </tr>
+            <tr>
+              <th>Total Facture</th>
+              <td>{{ total }} Dh</td>
+            </tr>
+            <td><button type="submit" class="btn btn1">Confirmer</button></td>
+          </tbody>
+        </table>
+      </div>
+    </div>
+</div>
+</form>
+</div>  
+{% endblock  %}

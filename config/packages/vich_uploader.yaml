@@ -1,0 +1,11 @@
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+       post_thumbnails:
+           uri_prefix: '%uploads_path%'
+           upload_destination: '%kernel.project_dir%/public/%uploads_path%'
+           delete_on_remove: true  # determine whether to delete file upon removal of entity
+           delete_on_update: true  # determine wheter to delete the file upon update of entity
+           inject_on_load: true   # det
+      

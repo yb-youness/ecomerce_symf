@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+{% block title %}Tous les Produits{% endblock %}
+{% block body %}
+    <div class="container-fluid p-5">
+		
+						<h3 class="text-center">Products</h3>
+                        
+  
+
+						{% if articles %}
+						<div class="row justify-content-center">
+						
+      
+		{% for article in articles %}
+			<div class="col-md-2 col-sm-6">
+                <div class="product-grid7">
+                    <div class="product-image7">
+                        <a href="{{path('detail',{'id': article.getId()})}}">
+                            <img class="pic-1" src="{{article.getPhotoPath()}}">
+                        </a>
+                        <ul class="social">
+                            {# <li><a href="{{path('AddPanier',{'id': article.id})}}" class="fa fa-shopping-cart"></a></li> #}
+                            <li><a href="" class="fas fa-heart"></a></li>
+                            <li><a href="" class="fas fa-retweet"></a></li>
+                        </ul>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="title"><a href="{{path('detail',{'id': article.getId()})}}">{{article.getNomArticle()}}</a></h3>
+                        <div class="price">{{article.getPrixArticle()}} Dh
+                      </div>
+                        <ul class="rating">
+                            <li class="fa fa-star"></li>
+                            <li class="fa fa-star"></li>
+                            <li class="fa fa-star"></li>
+                            <li class="fa fa-star"></li>
+                            <li class="fa fa-star"></li>
+                        </ul>
+                        
+                    </div>
+
+					</div>  
+                </div>
+				 {% endfor %}
+				         
+</div>
+  {% else %} 
+    <p>Aucun articles trouveé </p>
+  {% endif %} 
+    {% if (paginations) %}  
+            <div class="d-flex justify-content-center">{{knp_pagination_render(articles)}}</div> 
+   {% endif %}
+</div>
+
+{% endblock  %}

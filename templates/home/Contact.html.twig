@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+{% block title %}Contact{% endblock %}
+{% block stylesheets %}
+        <link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.min.css')}}">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+	<link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
+      integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../coustumcss/css/styles.css" />
+     <link rel="stylesheet" href="../../coustumcss/css/styles.css" />
+        {% endblock %}
+{% block body %}
+    <div class="container">
+		{% for message in app.flashes('success') %} 
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+	</div>
+      <div class="container-fluid">
+    <div class="row justify-content-center">
+              
+					<div class="col-md-10 col-md-offset-1">
+						<h3 class="text-center">Contact Information</h3>
+						<div class="row justify-content-center p-3">
+							<div class="mr-5">
+								<p><span><i class="fas fa-address-card"></i></span> Maroc Oujda , r 27 10016</p>
+							</div>
+							<div class="mr-5">
+								<p><span><i class="fas fa-phone"></i></span>+212 06654333</p>
+							</div>
+							<div class="mr-5">
+								<p><span><i class="fas fa-envelope"></i></span> ecomercnet@gmail.com</p>
+							</div>
+							<div class="mr-5">
+								<p><span><i class="fas fa-globe"></i></span> <a href="#">MyEcom.com</a></p>
+							</div>
+						</div>
+					</div>
+		</div>
+		<div class="container">
+					<div class="col-md-10 col-md-offset-1">
+						<div class="contact-wrap">
+							<h3>Envoi d'email</h3>
+							<form action="" method="post">
+								<div class="row form-group">
+									<div class="col-md-6 padding-bottom">
+									 {% if admin and is_granted('IS_AUTHENTICATED_FULLY') %}
+                                      <label for="name">From</label>
+									  <input type="text" id="from" name="name" class="form-control" placeholder="from" value="{{ app.user.nom }}" disabled>
+										{% else %}
+                                        <label for="name">Nom</label>
+										<input type="text" name="nom" id="name" class="form-control" placeholder="Nom" required>
+										{% endif %}
+									</div>
+								</div>
+								<div class="row form-group">
+									<div class="col-md-12">
+										<label for="email">Email</label>
+										  
+										<input type="email"  name="email" class="form-control"   placeholder="email">
+                                           
+ 
+
+									</div>
+								</div>
+
+								<div class="row form-group">
+									<div class="col-md-12">
+										<label for="subject">Sujet</label>
+										<input type="text" name="sujet" id="sujet" class="form-control" placeholder="Sujet" required>
+									</div>
+								</div>
+								<div class="row form-group">
+									<div class="col-md-12">
+										<label for="message">Message</label>
+										<textarea name="message" id="message" cols="30" rows="10" class="form-control" placeholder="Msg" required></textarea>
+									</div>
+								</div>
+								<div class="form-group text-center">
+									<input type="submit" value="Envoi de Message" class="btn btn-success">
+								</div>
+							</form>		
+						</div>
+					</div>
+				</div>
+			</div>		
+    </div> 
+</div>
+
+{% endblock  %}
