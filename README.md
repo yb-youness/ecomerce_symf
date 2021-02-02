@@ -41,7 +41,7 @@ ecomerce shop for managing products and users and categories
    `php bin/console doctrine:schema:update --force`
 4. Change the e MAILER_DSN in the config for using mailer (requires a valide email to use see the [docs](https://symfony.com/doc/current/mailer.html#installation) )
 5. Create A user white the role of admin in the database and encrypt the pass using
-   `bin/console security:encode-password 'your_plain_password' `
+    `bin/console security:encode-password 'your_plain_password' `
 6. Run <br> `composer install`
 7. Start symfony server
 
